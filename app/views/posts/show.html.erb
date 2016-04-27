@@ -1,0 +1,12 @@
+<table>
+	<tr>
+<th>Post</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td><%=@post.description%></td>
+<%@post.comments.each do |c|%>
+<td><%=c.reply%></td>
+</tr>
+<%end%>
+</table>

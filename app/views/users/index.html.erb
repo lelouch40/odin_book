@@ -1,0 +1,9 @@
+<%@user.each do |u| %>
+  <%if u.avatar.present?%>
+  <%=image_tag(u.avatar.url) %>
+  <%end%>
+<%=u.username%> 
+<%=link_to("Show", :action=>"show",:id=>u) %>
+<%=link_to("Edit",:controller=>"users", :action=>"edit",:id=>u.id) %>
+<%=u.email%></br>
+<%end%>

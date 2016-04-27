@@ -1,0 +1,11 @@
+<%=@user.username%>
+  <%if @user.avatar.present?%>
+  <%=image_tag(@user.avatar.url) %>
+  <%end%>
+<%@user.posts.each do |f| %>
+<%=f.description%>
+<%end%>
+<%@user.comments.each do|f|%>
+<%=f.reply%>
+<%end%>
+<%=@user.email%>

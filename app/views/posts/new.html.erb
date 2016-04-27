@@ -1,0 +1,6 @@
+<%= error_messages_for(@post) %>
+<%=simple_form_for @post do |f| %>
+  <%= f.input :description,:as => :text %>
+  <%= f.button :submit %>
+<% end %>
+
