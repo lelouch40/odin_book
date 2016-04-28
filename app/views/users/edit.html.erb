@@ -1,5 +1,12 @@
 <%=simple_form_for @user do |p|%>
 <%=p.input :email %>
 <%=p.input :username %>
+    <div class="field">
+    <%if @user.avatar.present?%>
+    <%=image_tag(@user.avatar.url) %>
+    <%end%>
+       <%= p.file_field :avatar %>
+  </div>
+
 <%=p.button :submit%>
 <%end%>

@@ -1,4 +1,1 @@
-<%=simple_form_for [@post,@comment] do |c| %>
-<%=c.input :reply %>
-<%=c.button :submit %>
-<%end%>
+    <%= render(:partial => "comments") %>

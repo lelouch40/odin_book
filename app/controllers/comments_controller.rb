@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :new, :create
 	def new
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build
