@@ -3,8 +3,8 @@ class PostsController < ApplicationController
 	    load_and_authorize_resource :except=>[:new,:create,:show]
 	      helper_method :show,:index
 	def index
-    @posts = current_user.posts.all
-				@comment=Comment.new
+      @posts = Post.subscribed current_user.following
+	@comment=Comment.new
 	end
 	def new
 		@post=Post.new
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 	def create
 		@post=current_user.posts.build(post_params)
 		if @post.save
-		redirect_to(:controller=>"users",:action=>"index")
+		redirect_to root_url
 		flash[:sucess]="Created post"
 	else
 				render "new"
@@ -20,8 +20,8 @@ class PostsController < ApplicationController
 		end
 		end
 		def show
-					@post=Post.find(params[:id])
-				end
+		@post=Post.find(params[:id])
+		end
 				private
 def post_params
 params.require(:post).permit(:description)

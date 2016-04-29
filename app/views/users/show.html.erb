@@ -1,8 +1,9 @@
 <%=@user.username%>
 <%=link_to("Edit", edit_user_registration_path(@user)) %>
-  <%#if @user.avatar.present?%>
-  <%#=image_tag(@user.avatar.url) %>
-  <%#end%>
+  <%if @user.avatar.present?%>
+  <%=image_tag(@user.avatar.url) %>
+  <%end%>
+ <%= render(:partial=>'check_follow')%>
 <%@user.posts.each do |f| %>
 <%=f.description%>
 <%end%>

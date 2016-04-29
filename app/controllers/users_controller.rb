@@ -19,24 +19,6 @@ class UsersController < ApplicationController
 		render("edit")
 end
 end
-  def follow
-    @user = User.find(params[:id])
-    if @user == current_user
-    	raise ArgumentError, "You can't follow yourself"
-    else
-    current_user.follow!(@user)
-    redirect_to(:action=>"index")
-  end
-end
-    def unfollow
-    	    	    @user = User.find(params[:id])
-    	    if @user == current_user
-    	raise ArgumentError, "You can't unfollow your self"
-    else
-    current_user.unfollow!(@user)
-        redirect_to(:action=>"index")
-  end
-end
 def user_params
 	params.require(:user).permit(:username,:email,:avatar,:password)
 end

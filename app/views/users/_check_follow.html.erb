@@ -1,0 +1,5 @@
+<% if !current_user.not_follow(@user)%>
+<%=render(:partial =>'unfollow')%>
+<%else%>
+<%=render(:partial =>'follow')%>
+<%end%>

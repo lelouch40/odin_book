@@ -1,12 +1,14 @@
-<%=current_user.username%>
-<%@comment=Comment.new%>
-<%@post=Post.find(1)%>
+<td><%= link_to(current_user.username, users_path,:id=>current_user.id) %></td>
 <%=link_to("Create Post",new_post_path)%>
  <%= link_to "log out", destroy_user_session_path, :method => :delete %>
 <h2>Posts:</h2>
-<%current_user.posts.each do|f|%>
+<%current_user.posts.each do |p|%>
+<%=p.description%>
+    <%= render(:partial => "comments",:locals => {:c => p}) %>
+<%@posts.each do |f|%>
+<%=f.description%>
+<%=f.comments.count%>
 <td><%= link_to("Show Post", :action=>"show",:id=>f.id) %></td>
     <%= render(:partial => "comments",:locals => {:c => f}) %>
-<td><%= link_to("Create comment",new_post_comment_path(f), :post_id=>f.id) %></td>
-<%=f.description%>
+<%end%>
 <%end%>

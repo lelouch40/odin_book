@@ -2,19 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
   	    member do
-  post 'follow',   to: 'socializations#follow'
-  post 'unfollow', to: 'socializations#unfollow'
+  get :following, :followers
 end
 end
   root 'posts#index'
-resources :comments do
-	  post 'follow',   to: 'socializations#follow'
-  post 'unfollow', to: 'socializations#unfollow'
-end
+resources :comments 
 resources :posts do
   resources :comments
-    post 'follow',   to: 'socializations#follow'
-  post 'unfollow', to: 'socializations#unfollow'
 end
-        match ":controller(/:action(/:id))", :via => [:get,:post]
+resources :relationships, only: [:create, :destroy]
+match ":controller(/:action(/:id))", :via => [:get,:post]
 end

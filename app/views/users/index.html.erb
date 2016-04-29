@@ -3,15 +3,9 @@
   <%#=image_tag(u.avatar.url) %>
   <%#end%>
 <%=u.username%> 
+  <%if u.avatar.present?%>
+  <%=image_tag(u.avatar.url) %>
+  <%end%>
 <%=link_to("Show", :action=>"show",:id=>u) %>
 <%=link_to("Edit", :controller=>"users",:action=>"edit",:id=>u) %>
-<%if current_user.follows?(u)%>
-<%=link_to('Unfollow',:controller=>"users",:action=>"unfollow", method: :post,:id=>u)%>
-<%else%>
-<%=link_to('Follow', :controller=>"users",:action=>"follow", method: :post,:id=>u)%>
-<%end%>
-<%u.followees(User).each do |f| f%>
-<%=f.username%>
-<%end%>
-<%=u.email%></br>
 <%end%>
