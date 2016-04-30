@@ -3,4 +3,5 @@ class Post < ActiveRecord::Base
 	has_many :comments
 	validates_presence_of :description
    scope :subscribed, ->(followers) { where user_id: followers }
+     acts_as_likeable
 end

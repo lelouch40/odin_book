@@ -26,8 +26,8 @@ gem 'cancancan', '~> 1.10'
 gem 'devise'
 gem 'simple_form'
 gem "carrierwave"
-gem 'rmagick'
-
+gem "socialization"
+gem 'will_paginate', '~> 3.1.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -8,6 +8,8 @@ end
   root 'posts#index'
 resources :comments 
 resources :posts do
+  post 'like', to: 'posts#like'
+    post 'unlike',  to: 'posts#unlike'
   resources :comments
 end
 resources :relationships, only: [:create, :destroy]

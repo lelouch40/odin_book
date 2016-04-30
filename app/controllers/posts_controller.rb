@@ -4,6 +4,8 @@ class PostsController < ApplicationController
 	      helper_method :show,:index
 	def index
       @posts = Post.subscribed current_user.following
+
+
 	@comment=Comment.new
 	end
 	def new
@@ -19,9 +21,21 @@ class PostsController < ApplicationController
 				flash[:error]= "Something went wrong"
 		end
 		end
-		def show
+				def like  
+	user = User.find(current_user.id)
+    post = Post.find(params[:id])
+    user.like!(post)
+    redirect_to root_url
+  end
+				def show
 		@post=Post.find(params[:id])
 		end
+		    def unlike
+   user = User.find(current_user.id)
+    @post = Post.find(params[:id])
+    current_user.unlike!(@post)
+    redirect_to root_url
+  end
 				private
 def post_params
 params.require(:post).permit(:description)

@@ -1,14 +1,19 @@
-<td><%= link_to(current_user.username, users_path,:id=>current_user.id) %></td>
+<td><%= link_to(current_user.username,:controller=>"users" ,:action=>"show",:id=>current_user.id) %></td>
 <%=link_to("Create Post",new_post_path)%>
  <%= link_to "log out", destroy_user_session_path, :method => :delete %>
 <h2>Posts:</h2>
-<%current_user.posts.each do |p|%>
-<%=p.description%>
-    <%= render(:partial => "comments",:locals => {:c => p}) %>
 <%@posts.each do |f|%>
 <%=f.description%>
-<%=f.comments.count%>
-<td><%= link_to("Show Post", :action=>"show",:id=>f.id) %></td>
-    <%= render(:partial => "comments",:locals => {:c => f}) %>
+<%if current_user.likes?(f)%>
+<h3><%= link_to 'Unlike', :action=>"unlike", :id=>f  %></h3>
+<%else%>
+<h3><%= link_to 'Like',  :action=>"like", :id=>f  %></h3>
 <%end%>
+<%=f.comments.count%>
+<%=f.likers(User).count%>
+<%f.likers(User).each do |n|%>
+<%=n.username%>
+<%end%>
+<td><%= link_to("Show Post", :action=>"show",:id=>f) %></td>
+    <%#= render(:partial => "comments",:locals => {:c => f}) %>
 <%end%>
