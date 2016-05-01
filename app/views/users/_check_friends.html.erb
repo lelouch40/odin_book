@@ -1,0 +1,6 @@
+<%case%>
+<%when !current_user.friends_with?(@user)%>
+<%=render(:partial =>'friend')%>
+<%when current_user.friends_with?(@user)%>
+<%=render(:partial =>'unfriend')%>
+<%end%>

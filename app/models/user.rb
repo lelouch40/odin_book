@@ -17,13 +17,17 @@ class User < ActiveRecord::Base
 
   has_many :friendships
 has_many :friends, :through => :friendships
-has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-has_many :inverse_friends, :through => :inverse_friendships, :source => :user
-
+has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+has_many :passive_friends, :through => :passive_friendships, :source => :user
+has_many :requested_friendships, -> { where(friendships: { accepted: false}) }, :through => :passive_friendships, :source => :user
+has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :through => :friendships, :source => :friend
     acts_as_liker
    def admin?
     admin
   end
+      def friends
+      passive_friendships | passive_friends
+    end
   mount_uploader :avatar, AvatarUploader
     #validates_presence_of   :avatar
   def follow(other_user)
@@ -39,7 +43,18 @@ has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   def following?(other_user)
     following.include?(other_user)
   end
-    def not_follow(other_user)
+
+        def not_follow(other_user)
     !following.include?(other_user)
+  end
+
+  def friend(other_user)
+      friendships.create(:friend_id => other_user.id)
+    end
+    def unfriend(other_user)
+   friendships.find_by(friend_id: other_user.id).destroy
+    end
+    def friends_with?(other_user)
+    friends.include?(other_user)
   end
 end

@@ -3,6 +3,14 @@ Rails.application.routes.draw do
   resources :users do
   	    member do
   get :following, :followers
+    get :delete
+end
+end
+resources :friendships do
+member do
+    put 'friend_request'
+    put 'friend_request_accept'
+    delete 'friend_request_reject'
 end
 end
   root 'posts#index'
