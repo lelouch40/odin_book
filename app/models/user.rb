@@ -15,16 +15,16 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
 
 
-  has_many :active_friend,         class_name:  "Friendship",
-                                   foreign_key: "friend_id",
-                                   dependent:   :destroy
-  has_many :passive_friend,        class_name:  "Friendship",
-                                   foreign_key: "user_id",
-                                   dependent:   :destroy
-  has_many :friends, through: :active_friend,  source: :friend, :class_name=> "User"
-  has_many :friended, through: :passive_friend, source: :user, :class_name=> "User"
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
 
+    has_many :otherfriendships
+  has_many :otherfriends, :through => :otherfriendships
+  has_many :inverse_otherfriendships, :class_name => "Friendship", :foreign_key => "friended_id"
+  has_many :inverse_otherfriends, :through => :inverse_otherfriendships, :source => :user
 
 has_many :requested_friendships, -> { where(friendships: { accepted: false}) }, :through => :passive_friend, :source => :user
 has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :through => :friended, :source => :friend
