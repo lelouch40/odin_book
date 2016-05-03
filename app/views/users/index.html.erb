@@ -8,4 +8,9 @@
   <%end%>
 <%=link_to("Show", :action=>"show",:id=>u) %>
 <%=link_to("Edit", :controller=>"users",:action=>"edit",:id=>u) %>
+<%#if current_user.friends_with?(u)%>
+<%#= link_to "Remove Friend",friendships_path(current_user.friendships.find_by_friend_id(u), method: :delete) %>
+<%#else%>
+<%#= link_to "Add Friend", friendships_path(:friend_id => u), :method => :post %>
+<%#end%>
 <%end%>

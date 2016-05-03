@@ -15,19 +15,24 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
 
 
-  has_many :friendships
-has_many :friends, :through => :friendships
-has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-has_many :passive_friends, :through => :passive_friendships, :source => :user
-has_many :requested_friendships, -> { where(friendships: { accepted: false}) }, :through => :passive_friendships, :source => :user
-has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :through => :friendships, :source => :friend
+  has_many :active_friend,         class_name:  "Friendship",
+                                   foreign_key: "friend_id",
+                                   dependent:   :destroy
+  has_many :passive_friend,        class_name:  "Friendship",
+                                   foreign_key: "user_id",
+                                   dependent:   :destroy
+  has_many :friends, through: :active_friend,  source: :friend, :class_name=> "User"
+  has_many :friended, through: :passive_friend, source: :user, :class_name=> "User"
+
+
+
+has_many :requested_friendships, -> { where(friendships: { accepted: false}) }, :through => :passive_friend, :source => :user
+has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :through => :friended, :source => :friend
+
     acts_as_liker
    def admin?
     admin
   end
-      def friends
-      passive_friendships | passive_friends
-    end
   mount_uploader :avatar, AvatarUploader
     #validates_presence_of   :avatar
   def follow(other_user)
@@ -49,10 +54,10 @@ has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :throu
   end
 
   def friend(other_user)
-      friendships.create(:friend_id => other_user.id)
+      friends.create(:friend_id => other_user.id)
     end
     def unfriend(other_user)
-   friendships.find_by(friend_id: other_user.id).destroy
+   passive_friend.find_by(friend_id: other_user.id) .destroy
     end
     def friends_with?(other_user)
     friends.include?(other_user)

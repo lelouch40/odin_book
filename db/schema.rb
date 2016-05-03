@@ -37,8 +37,6 @@ ActiveRecord::Schema.define(version: 20160430155414) do
     t.integer  "friend_id",  limit: 4
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
-    t.integer  "to_id",      limit: 4
-    t.integer  "from_id",    limit: 4
     t.boolean  "accepted",             default: false
   end
 

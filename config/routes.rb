@@ -11,6 +11,7 @@ member do
     put 'friend_request'
     put 'friend_request_accept'
     delete 'friend_request_reject'
+    get :delete
 end
 end
   root 'posts#index'
