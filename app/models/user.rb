@@ -17,11 +17,12 @@ class User < ActiveRecord::Base
 
   has_many :friendships
   has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user, :foreign_key => "friend_id"
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
 
     has_many :otherfriendships
-  has_many :otherfriends, :through => :otherfriendships
+  has_many :otherfriends, :through => :otherfriendships,  :source => :user
   has_many :inverse_otherfriendships, :class_name => "Friendship", :foreign_key => "friended_id"
   has_many :inverse_otherfriends, :through => :inverse_otherfriendships, :source => :user
 
@@ -52,13 +53,9 @@ has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :throu
     !following.include?(other_user)
   end
 
-  def friend(other_user)
-      friends.create(:friend_id => other_user.id)
-    end
-    def unfriend(other_user)
-   passive_friend.find_by(friend_id: other_user.id) .destroy
-    end
-    def friends_with?(other_user)
+
+    def friends_with?(other_user,current)
     friends.include?(other_user)
+    otherfriends.include?(current)
   end
 end

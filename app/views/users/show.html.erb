@@ -5,14 +5,15 @@
   <%end%>
  <%= render(:partial=>'check_follow')%>
   <%#= render(:partial=>'check_friends')%>
-  <%if current_user.friends_with?(@user)%>
+  <% unless current_user == @user%>
+  <%if current_user.friends_with?(@user, current_user)%>
 <ul>
   <% for friendship in @user.friendships %>
     <li>
       <%=h friendship.friend.username %>
       (<%= link_to "remove", friendship, :method => :delete %>)
     </li>
-  <% end %>
+  <%end%>
 </ul>
     <%else%>
 <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
@@ -20,9 +21,10 @@
     <%current_user.friends.each do |f|%>
     <%=f.username%>
     <%end%>
-    <%current_user.otherfriendships.each do |f|%>
-    <%=f.id%>
+    <%current_user.otherfriends.each do |f|%>
+    <%=f.username%>
     <%end%>
+<%end%>
 
 
 <%@user.posts.each do |f| %>
@@ -44,3 +46,6 @@
     <li><%=h user.username %></li>
   <% end %>
 </ul>
+  <% for otherfriendship in @user.otherfriends%>
+       <%=otherfriendship.username%>
+       <%end%>
