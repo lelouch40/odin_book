@@ -1,4 +1,10 @@
-<%=form_for(current_user.friendships.build) do |f|%>
-  <div><%= hidden_field_tag :friend_id, @user.id %></div>
-<%=f.submit "Add Friend"%>
-<%end%>
+     <ul>
+     <%@user.each do |u| %>
+     <% u.friends.each do |f|%>
+        <li>
+          <%= u.friend.username %>
+          <%= link_to "Unfriend", f, :method => :delete %>
+        </li>
+        <%end%>
+                  <%end%>
+    </ul>

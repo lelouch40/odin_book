@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
 
-    has_many :otherfriendships
-  has_many :otherfriends, :through => :otherfriendships,  :source => :user
-  has_many :inverse_otherfriendships, :class_name => "Friendship", :foreign_key => "friended_id"
-  has_many :inverse_otherfriends, :through => :inverse_otherfriendships, :source => :user
+has_many :otherfriendships,
+         :through => :inverse_friendships,
+         :source => :user
+         #:conditions => ["friendships.user_id = users.id and friendships.friend_id = :self_id", :self_id => id]
 
 has_many :requested_friendships, -> { where(friendships: { accepted: false}) }, :through => :passive_friend, :source => :user
 has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :through => :friended, :source => :friend
@@ -54,8 +54,8 @@ has_many :pending_friends, -> { where(friendships: { accepted: false}) }, :throu
   end
 
 
-    def friends_with?(other_user,current)
+    def friends_with?(other_user)
     friends.include?(other_user)
-    otherfriends.include?(current)
+    otherfriendships.include?(other_user)
   end
 end

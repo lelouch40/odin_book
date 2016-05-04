@@ -5,32 +5,21 @@
   <%end%>
  <%= render(:partial=>'check_follow')%>
   <%#= render(:partial=>'check_friends')%>
-  <% unless current_user == @user%>
-  <%if current_user.friends_with?(@user, current_user)%>
-<ul>
-  <% for friendship in @user.friendships %>
-    <li>
-      <%=h friendship.friend.username %>
-      (<%= link_to "remove", friendship, :method => :delete %>)
-    </li>
-  <%end%>
-</ul>
-    <%else%>
-<%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
-    <%end%>
-    <%current_user.friends.each do |f|%>
+  <%if @user.inverse_friends.include?(current_user) ||  current_user.friends.include?(@user)%>
+        <%else%>
+     <%= link_to "Add Friend", friendships_path(:friend_id => @user.friends), :method => :post %>
+       <%end%>
+<h1>TEST</h1>
+    <%@user.friends.each do |f|%>
     <%=f.username%>
     <%end%>
-    <%current_user.otherfriends.each do |f|%>
+    <%@user.otherfriendships.each do |f|%>
     <%=f.username%>
     <%end%>
-<%end%>
-
 
 <%@user.posts.each do |f| %>
 <%=f.description%>
 <%end%>
-<%=@user.email%>
 <h2>Friends</h2>
 <ul>
 
@@ -38,14 +27,14 @@
 
 
 <h2>Friends</h2>
-<p><%= link_to "Find Friends", users_path %></p>
-      <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
-<h2>Friended by Users</h2>
 <ul>
+  <% for friendship in @user.friendships %>
+    <li>
+      <%=h friendship.friend.username %>
+      (<%= link_to "remove", friendship, :method => :delete %>)
+    </li>
+  <% end %>
   <% for user in @user.inverse_friends %>
     <li><%=h user.username %></li>
   <% end %>
 </ul>
-  <% for otherfriendship in @user.otherfriends%>
-       <%=otherfriendship.username%>
-       <%end%>
