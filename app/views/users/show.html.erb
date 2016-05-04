@@ -17,7 +17,12 @@
     <%else%>
 <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
     <%end%>
-
+    <%current_user.friends.each do |f|%>
+    <%=f.username%>
+    <%end%>
+    <%current_user.otherfriendships.each do |f|%>
+    <%=f.id%>
+    <%end%>
 
 
 <%@user.posts.each do |f| %>
