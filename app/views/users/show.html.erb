@@ -7,7 +7,7 @@
   <%#= render(:partial=>'check_friends')%>
   <%if @user.inverse_friends.include?(current_user) ||  current_user.friends.include?(@user)%>
         <%else%>
-     <%= link_to "Add Friend", friendships_path(:friend_id => @user.friends), :method => :post %>
+     <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post %>
        <%end%>
 <h1>TEST</h1>
     <%@user.friends.each do |f|%>

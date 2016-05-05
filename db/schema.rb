@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503211110) do
+ActiveRecord::Schema.define(version: 20160504095848) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 20160503211110) do
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
   create_table "friendships", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "friend_id",  limit: 4
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.boolean  "accepted",             default: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "friend_id",   limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "accepted",              default: false
+    t.integer  "friended_id", limit: 4
   end
 
   add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
