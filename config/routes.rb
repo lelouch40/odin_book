@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+    root 'posts#index'
   devise_for :users
   resources :users do
   	    member do
@@ -14,7 +15,6 @@ member do
     get :delete
 end
 end
-  root 'posts#index'
 resources :comments 
 resources :posts do
   post 'like', to: 'posts#like'

@@ -15,6 +15,12 @@ class CommentsController < ApplicationController
     flash.now[:danger] = "error"
   end
  end
+     def destroy
+    @comment=Comment.find(params[:id])
+  @comment.destroy
+        redirect_to :back
+      flash[:sucess]="Deleted Post"
+    end
  def comment_params
  params.require(:comment).permit(:reply)
 

@@ -1,15 +1,18 @@
-<table>
-	<tr>
-<th>Post</th>
-<th>Comment</th>
-</tr>
-<tr>
-<td><%=@post.description%></td>
+<style>
+</style>
+<%=render :partial=> "nav"%>
+<div class="text-center">
+	<div class="jumbotron container">
+<h1>Posts</h1>
+<h3>Created At: <%=@post.created_at%></h3>
+<h2><%=@post.description %></br></h2>
+</div>
+<h3>Comments</h3>
 <%@post.comments.each do |c|%>
 <td><%=c.reply%></td>
-</tr>
+ <td><%= link_to 'Destroy', c, method: :delete, :class=>"btn btn-danger" %></td></br>
 <%end%>
-</table>
 <%@comment=Comment.new%>
 <%@post%>	
     <%= render(:partial => "comments") %>
+</div>

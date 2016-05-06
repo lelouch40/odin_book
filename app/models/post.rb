@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-	belongs_to :users
+	belongs_to :user
 	has_many :comments
 	validates_presence_of :description
    scope :subscribed, ->(followers) { where user_id: followers }

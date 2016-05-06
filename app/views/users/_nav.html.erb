@@ -1,0 +1,15 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OdinBook</a>
+    </div>
+    <ul class="nav navbar-nav">
+    	<%=link_to "Home" ,root_url, :class=> 'navbar-brand' %>
+      <li><td><%= link_to(current_user.username,:controller=>"users" ,:action=>"show",:id=>current_user.id) %></td></li>
+      <li><%=link_to("Create Post",new_post_path)%></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+<li><span class="glyphicon glyphicon-log-in"></span> <%= link_to "Logout", destroy_user_session_path, :method =>:delete %></li>
+    </ul>
+  </div>
+</nav>

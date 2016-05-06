@@ -1,10 +1,9 @@
-<td><%= link_to(current_user.username,:controller=>"users" ,:action=>"show",:id=>current_user.id) %></td>
-<%=link_to("Create Post",new_post_path)%>
- <%= link_to "log out", destroy_user_session_path, :method => :delete %>
+<%=render :partial=> "nav"%>
 <h2>Posts:</h2>
 <%@posts.each do |f|%>
 <%=f.description%>
 <%if current_user.likes?(f)%>
+
 <h3><%= link_to 'Unlike', :action=>"unlike", :id=>f  %></h3>
 <%else%>
 <h3><%= link_to 'Like',  :action=>"like", :id=>f  %></h3>
@@ -17,3 +16,4 @@
 <td><%= link_to("Show Post", :action=>"show",:id=>f) %></td>
     <%#= render(:partial => "comments",:locals => {:c => f}) %>
 <%end%>
+    <%= render 'layouts/messages' %>

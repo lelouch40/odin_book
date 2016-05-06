@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 		flash[:sucess]="Edited"
 		redirect_to(:action=>"index")
 	else
+				flash[:notice]="Error"
 		render("edit")
 end
 end

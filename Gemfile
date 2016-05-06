@@ -28,7 +28,8 @@ gem 'simple_form'
 gem "carrierwave"
 gem "socialization"
 gem 'will_paginate', '~> 3.1.0'
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'rmagick'
+gem 'bootstrap-sass', '~> 3.3.6'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
