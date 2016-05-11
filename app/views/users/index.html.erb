@@ -1,11 +1,25 @@
 <%=render :partial=> "nav"%>
+<div class="page-header text-center">
+  <h3>Users</h3>
+</div>
+	<div class="jumbotron container" style="width: 460px; height: 460px; padding: 38px;border-radius: 16px;">
+<table class="table table-striped" style="width: 399px; cellspacing: 0;border-spacing: 0;">
+	<div class="text-center">
 <%@user.each do |u| %>
+<tr>
+	<th>Username</th>
+	<th>Actions</th>
+</tr>
   <%#if u.avatar.present?%>
   <%#=image_tag(u.avatar.url) %>
   <%#end%>
+  <tr>
   <%if u.avatar.present?%>
-  <%=image_tag(u.avatar.url) %>
+  <td><%=image_tag(u.avatar.url,:class=>"img-circle") %>
   <%end%>
-<%=link_to(u.username, :action=>"show",:id=>u) %>
-<%=link_to("Edit", :controller=>"users",:action=>"edit",:id=>u) %>
+<%=link_to(u.username, :action=>"show",:id=>u, :class=>"btn btn-danger") %></td>
+<td><%=link_to("Edit", :controller=>"users",:action=>"edit",:id=>u) %></td>
 <%end%>
+</table>
+</div>
+</div>

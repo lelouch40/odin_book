@@ -36,6 +36,9 @@ class PostsController < ApplicationController
     current_user.unlike!(@post)
     redirect_to root_url
   end
+  def likers
+  	@likes=Post.find(params[:id])
+	end
 				private
 def post_params
 params.require(:post).permit(:description)

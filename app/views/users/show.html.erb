@@ -1,5 +1,6 @@
 <%=render :partial=> "nav"%>
 <%=@user.username%>
+<%=@user.email%>
 <%=link_to("Edit", edit_user_registration_path(@user)) %>
   <%if @user.avatar.present?%>
   <%=image_tag(@user.avatar.url , :class => 'img-circle') %>

@@ -1,19 +1,28 @@
 <%=render :partial=> "nav"%>
-<h2>Posts:</h2>
-<%@posts.each do |f|%>
-<%=f.description%>
-<%if current_user.likes?(f)%>
-
-<h3><%= link_to 'Unlike', :action=>"unlike", :id=>f  %></h3>
-<%else%>
-<h3><%= link_to 'Like',  :action=>"like", :id=>f  %></h3>
-<%end%>
-<%=f.comments.count%>
-<%=f.likers(User).count%>
-<%f.likers(User).each do |n|%>
-<%=n.username%>
-<%end%>
-<td><%= link_to("Show Post", :action=>"show",:id=>f) %></td>
-    <%#= render(:partial => "comments",:locals => {:c => f}) %>
-<%end%>
-    <%= render 'layouts/messages' %>
+  <style>
+  body {
+    background-color: grey;
+}
+</style>
+	<div class="jumbotron container" style="width: 960px; height: 860px; padding: 38px;border-radius: 16px;background-color:white;">
+<div class="text-center" style="padding-down: 150px;">
+	<%=render :partial=> "post"%>
+	<%@posts.each do |f|%>
+	<h2><%=f.description%></h2>
+	<%if current_user.likes?(f)%>
+	<%= link_to 'Unlike', :action=>"unlike", :id=>f  %>
+	<%else%>
+	<%= link_to 'Like',  :action=>"like", :id=>f, :class=>"fa fa-thumbs-up"  %>
+	<%end%>
+	<%=f.comments.count%>
+	<%=f.likers(User).count%>
+	<%f.likers(User).each do |n|%>
+	<%=n.username%>
+	<%end%>
+		<td><%= link_to("Show Likers", :action=>"likers",:id=>f) %></td>
+	<td><%= link_to("Show Post", :action=>"show",:id=>f) %></td>
+	    <%#= render(:partial => "comments",:locals => {:c => f}) %>
+	<%end%>
+	    <%= render 'layouts/messages' %>
+</div>
+</div>

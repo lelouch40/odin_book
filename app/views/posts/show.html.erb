@@ -1,18 +1,32 @@
 <style>
 </style>
 <%=render :partial=> "nav"%>
-<div class="text-center">
-	<div class="jumbotron container">
+	<div class="jumbotron container" style="width: 560px; height: 630px; padding: 38px;border-radius: 16px;">
+<table class="table table-striped" style="width: 399px;padding:180px; ">
+	<div class="text-center">
 <h1>Posts</h1>
 <h3>Created At: <%=@post.created_at%></h3>
 <h2><%=@post.description %></br></h2>
 </div>
 <h3>Comments</h3>
+<table class="table table-striped">
+	<tr>
+		<th>Username</th>
+		<th>Replies</th>
+		<th>Action</th>
+	</tr>
+	<tr>
+		<%@comment=Comment.new%>
+		    <%= render(:partial => "comments") %>
 <%@post.comments.each do |c|%>
+  <td><%=image_tag(c.user.avatar.url,:class=>"img-circle") %>
+<%=link_to c.user.username,:controller=>"users", :action=>"show",:id=>c.user %></td>
 <td><%=c.reply%></td>
  <td><%= link_to 'Destroy', c, method: :delete, :class=>"btn btn-danger" %></td></br>
+</tr>
 <%end%>
-<%@comment=Comment.new%>
 <%@post%>	
-    <%= render(:partial => "comments") %>
+</table>
+</div>
+</div>
 </div>
