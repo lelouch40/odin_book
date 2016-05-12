@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504095848) do
+ActiveRecord::Schema.define(version: 20160512041521) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id",    limit: 4
@@ -111,6 +111,12 @@ ActiveRecord::Schema.define(version: 20160504095848) do
     t.string   "last_sign_in_ip",        limit: 255
     t.boolean  "admin",                              default: false
     t.string   "avatar",                 limit: 255
+    t.string   "provider",               limit: 255
+    t.string   "uid",                    limit: 255
+    t.string   "name",                   limit: 255
+    t.string   "oauth_token",            limit: 255
+    t.datetime "oauth_expires_at"
+    t.string   "first_name",             limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

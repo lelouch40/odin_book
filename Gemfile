@@ -21,7 +21,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-  gem 'koala'
 gem 'cancancan', '~> 1.10'
 gem 'devise'
 gem 'simple_form'
@@ -30,6 +29,11 @@ gem "socialization"
 gem 'will_paginate', '~> 3.1.0'
 gem 'rmagick'
 gem 'bootstrap-sass', '~> 3.3.6'
+ gem 'omniauth'
+ gem 'omniauth-facebook'
+  #gem 'omniauth-twitter'
+   gem 'koala'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

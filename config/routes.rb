@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  resources :photos
+  resources :galleries
+  get 'gallery/scaffold'
+
     root 'posts#index'
-  devise_for :users
+    devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
   	    member do
   get :following, :followers
@@ -21,6 +25,9 @@ resources :posts do
     post 'unlike',  to: 'posts#unlike'
   resources :comments
 end
+get '/auth/:provider/callback', to: 'oauth#create'
+get 'auth/failure', to: redirect('/')
+get 'signout', to: 'oauth#destroy', as: 'signout'
 resources :relationships, only: [:create, :destroy]
 match ":controller(/:action(/:id))", :via => [:get,:post]
 end
