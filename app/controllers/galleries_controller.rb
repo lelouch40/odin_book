@@ -1,15 +1,13 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /galleries
   # GET /galleries.json
-  def index
-    @galleries = Gallery.all
-  end
 
   # GET /galleries/1
   # GET /galleries/1.json
-  def show
+      def show
+    @gallery = Gallery.find(params[:id])
   end
 
   # GET /galleries/new
@@ -23,19 +21,19 @@ class GalleriesController < ApplicationController
 
   # POST /galleries
   # POST /galleries.json
-  def create
-    @gallery = Gallery.new(gallery_params)
-
-    respond_to do |format|
-      if @gallery.save
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
-        format.json { render :show, status: :created, location: @gallery }
-      else
-        format.html { render :new }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
-      end
-    end
+  def new
+    @gallery=Gallery.new
   end
+  def create
+    @gallery=current_user.galleries.build(gallery_params)
+    if @gallery.save
+    redirect_to current_user
+    flash[:sucess]="Created gallery"
+  else
+        render "new"
+        flash[:error]= "Something went wrong"
+    end
+    end
 
   # PATCH/PUT /galleries/1
   # PATCH/PUT /galleries/1.json
@@ -69,6 +67,6 @@ class GalleriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.fetch(:gallery, {})
+      params.require(:gallery).permit(:user_id, :photo_id)
     end
 end

@@ -1,6 +1,4 @@
-<h1>Editing Gallery</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @gallery %> |
 <%= link_to 'Back', galleries_path %>
+       <%= p.file_field :photo %>
+
+    <%=image_tag(@user.photo.url) %>

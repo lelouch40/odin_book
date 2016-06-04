@@ -24,22 +24,28 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-    process resize_to_fill: [30, 30]
-   def scale(width, height)
+   # process resize_to_fill: [30, 30]
+   #def scale(width, height)
      # do something
-   end
-  version :resized do
+  # end
+  #version :resized do
     # returns an image with a maximum width of 100px 
     # while maintaining the aspect ratio
     # 10000 is used to tell CW that the height is free 
     # and so that it will hit the 100 px width first
-  process resize_to_fill: [30, 30]
-  process convert: 'png'
-  end
+  #process resize_to_fill: [140, 140]
+ # process convert: 'jpeg'
+  #end
 
 version :thumb do
-      process resize_to_fill: [96, 90]
+      process resize_to_fill: [60, 60]
 end
+version :comment do
+      process resize_to_fill: [35, 35]
+end
+#version :profile do
+ #     process resize_to_fill: [96,90]
+#end
   # Create different versions of your uploaded files:
    #version :thumb do
    #  process :resize_to_fit => [10, 10]

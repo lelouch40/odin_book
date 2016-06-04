@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :photos
-  resources :galleries
-  get 'gallery/scaffold'
+ 
 
     root 'posts#index'
     devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
@@ -18,6 +16,10 @@ member do
     delete 'friend_request_reject'
     get :delete
 end
+end
+ resources :photos
+  resources :galleries do
+ resources :photos
 end
 resources :comments 
 resources :posts do

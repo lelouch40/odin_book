@@ -1,4 +1,35 @@
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+<div class="centerfield">
+<%@photo=Photo.new%>
+<%=simple_form_for [@gallery, @photo],  :html => {:multipart => true} do |p|%>
+              <%= p.file_field :photo, :class=>"centerfile" %>
+                  <span class="glyphicon glyphicon-upload"></span>
+<%=p.button :submit%>
+</div>
+    <%end%>
+    <!--
+    <ul class="thumbnails">
+    	  <li class="col-sm-6 col-md-4">
+    <#%@gallery.photos.each do |photo|%>
+            <%#= image_tag photo.photo_url(:thumb) %>
+        </li>
+        <li class="span2">
+            <%#= link_to("Show Photo", photo)%>
+            <%#= link_to("Delete Photo", photo, :method=> :delete, :data=> "Are you sure")%>
+              </li>
+      <%#end%>
+        </div>
+</ul>
+!-->
+    <%@gallery.photos.each do |photo|%>
+  <div class="col-lg-2 col-md-2 col-sm-6 col-md-2 rowss">
+    <div class="thumbnail">
+            <%= image_tag photo.photo_url(:thumb) %>
+      <div class="caption">
+        <h3>Thumbnail label</h3>
+        <p><%=link_to("Delete Photo", photo, :method=> :delete, :data=> "Are you sure", :class=>"btn btn-danger")%></p>
+        <p><%=link_to("Show Photo", photo, :class=>"btn btn-default")%></p>
+      </div>
+    </div>
+  </div>
+            <%end%>

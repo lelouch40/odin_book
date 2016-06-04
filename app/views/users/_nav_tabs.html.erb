@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+	  <li role="presentation"></li>
+  <li role="presentation" class="active"><a href="#"><%=current_user.username%></a></li>
+            <% current_user.galleries.each do |gallery| %>
+  <li role="presentation"><%= link_to 'Show gallery',gallery %></li>
+  <%end%>
+  <li role="presentation"><%=link_to("Edit", edit_user_registration_path(@user)) %></li>
+    <li role="presentation"><%=link_to("Find Friends", users_path) %></li>
+        <li role="presentation"><%=link_to("Friends", :action=>"friends", :id=>@user) %></li>
+       <li role="presentation"><%=link_to("Create gallery", :action=>"create", :controller=>"galleries") %></li>
+</ul>

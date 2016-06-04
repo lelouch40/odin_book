@@ -1,6 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+@import "font-awesome";
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../assets/glyphicons-halflings-regular.eot');
@@ -53,15 +53,7 @@
 @import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
 
 body{
-  background-color:#fff;
-}
-.container{
-  margin-top:35px;
-  width:366px;
-  box-shadow: 5px 5px 5px #888888;  
-  border-radius:5px;
-  background-color:#3b5998;
-  
+  background-color:#e5e5e5;
 }
 .jumbotron-special{
   width:100%;
@@ -85,6 +77,72 @@ body{
 }
 .formmm{
   margin-bottom:100px;
+}
+.thumbnails{
+  margin-top:11px;
+  padding-top:11 11 11 11px;
+      list-style-type: none;
+}
+.span3{
+            display: inline;
+}
+.rowss{
+  margin-top:10px;
+      display:inline;
+}
+.friend{
+        list-style-type: none;
+}
+.centerfield{
+  margin-left:555px;
+}
+.centerfile{
+  margin-left:120px;
+}
+.profile{
+  float:left;
+  margin-bottom:7px;
+}
+.postpic{
+  text-align: left;
+}
+.container-session{
+      margin-left:485px;
+  width:346px;
+  height:460px;
+  box-shadow: 5px 5px 5px #888888;  
+  border-radius:5px;
+  background-color:#e9ebee;
+}
+.centerfile{
+  margin-left:120px;
+}
+.profile{
+  float:left;
+  margin-bottom:7px;
+}
+.postpic{
+  text-align: left;
+  padding-bottom:15px;
+}
+.postswrap{
+  background-color:white;
+  width:70%;
+}
+.content{
+  padding-left:287px;
+  overflow:hidden;
+}
+.border{
+  border-bottom:1px solid #e5e5e5;
+  padding-bottom:4px;
+}
+.likers{
+  padding-right:607px;
+}
+.comment-pic{
+  text-align:left;
+    padding-bottom:4px;
 }
 
 @jumbotron-color

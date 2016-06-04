@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -33,6 +33,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
  gem 'omniauth-facebook'
   #gem 'omniauth-twitter'
    gem 'koala'
+   gem "font-awesome-rails"
+   gem 'shoulda-matchers', '~> 2.7.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -50,6 +52,8 @@ group :development, :test do
 gem 'capybara'
 gem 'mocha'
   gem 'factory_girl_rails'
+     gem 'shoulda-matchers', '~> 2.7.0'
+       gem 'database_cleaner'
 end
 
 group :development do

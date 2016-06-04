@@ -1,25 +1,35 @@
 <%=render :partial=> "nav"%>
+<%=render :partial=> "nav_tabs"%>
+<style>
+body{
+  background-color: #fff;
+}
+</style>
 <div class="page-header text-center">
   <h3>Users</h3>
 </div>
-	<div class="jumbotron container" style="width: 460px; height: 460px; padding: 38px;border-radius: 16px;">
+	<div class="jumbotron container" style="width: 460px; height: 100%; padding: 38px;border-radius: 16px;">
 <table class="table table-striped" style="width: 399px; cellspacing: 0;border-spacing: 0;">
 	<div class="text-center">
 <%@user.each do |u| %>
 <tr>
 	<th>Username</th>
 	<th>Actions</th>
+  <th>Friend</th>
 </tr>
-  <%#if u.avatar.present?%>
-  <%#=image_tag(u.avatar.url) %>
-  <%#end%>
   <tr>
   <%if u.avatar.present?%>
-  <td><%=image_tag(u.avatar.url,:class=>"img-circle") %>
+  <td><%=image_tag(u.avatar.url(:thumb),:class=>"img-circle") %>
   <%end%>
 <%=link_to(u.username, :action=>"show",:id=>u, :class=>"btn btn-danger") %></td>
 <td><%=link_to("Edit", :controller=>"users",:action=>"edit",:id=>u) %></td>
+  <%if u.inverse_friends.include?(current_user) ||  current_user.friends.include?(u)%>
+        <td><%=(link_to "remove", u, :method => :delete, :class=>"btn btn-danger")%></td>
+        <%else%>
+     <td><%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, :class=>"btn btn-danger" %></td>
+     <%end%>
 <%end%>
+   </tr>
 </table>
 </div>
 </div>

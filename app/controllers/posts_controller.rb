@@ -4,8 +4,6 @@ class PostsController < ApplicationController
 	      helper_method :show,:index
 	def index
       @posts = Post.subscribed current_user.following
-
-
 	@comment=Comment.new
 	end
 	def new
@@ -14,11 +12,11 @@ class PostsController < ApplicationController
 	def create
 		@post=current_user.posts.build(post_params)
 		if @post.save
-		redirect_to root_url
+		redirect_to @post
 		flash[:sucess]="Created post"
 	else
-				render "new"
-				flash[:error]= "Something went wrong"
+		render "new"
+			flash[:error]= "Something went wrong"
 		end
 		end
 				def like  
@@ -39,6 +37,9 @@ class PostsController < ApplicationController
   def likers
   	@likes=Post.find(params[:id])
 	end
+	def edit
+				@post=Post.find(params[:id])
+end
 				private
 def post_params
 params.require(:post).permit(:description)

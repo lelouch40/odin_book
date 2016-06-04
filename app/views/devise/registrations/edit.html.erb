@@ -31,7 +31,7 @@
   </div></br>
     <div class="form-group">
     <%if @user.avatar.present?%>
-    <%=image_tag(@user.avatar.url ,:class => 'img-circle') %>
+    <%=image_tag(@user.avatar.url(:thumb) ,:class => 'img-circle') %>
     <%end%></br>
        <%= f.file_field :avatar %>
   </div></br>

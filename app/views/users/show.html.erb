@@ -1,10 +1,14 @@
 <%=render :partial=> "nav"%>
-<%=@user.username%>
+<%=render :partial=> "nav_tabs"%>
+    <div class="profile">
+        <%if @user.avatar.present?%>
+  <%=image_tag(@user.avatar.url(:thumb)) %>
+  <%end%>
+</div>
+</div>
+<div class='text-center'>
 <%=@user.email%>
 <%=link_to("Edit", edit_user_registration_path(@user)) %>
-  <%if @user.avatar.present?%>
-  <%=image_tag(@user.avatar.url , :class => 'img-circle') %>
-  <%end%>
  <%= render(:partial=>'check_follow')%>
   <%#= render(:partial=>'check_friends')%>
   <%if @user.inverse_friends.include?(current_user) ||  current_user.friends.include?(@user)%>
@@ -18,10 +22,54 @@
     <%@user.otherfriendships.each do |f|%>
     <%=f.username%>
     <%end%>
-
 <%@user.posts.each do |f| %>
-<%=f.description%>
+<div class="content">
+    <div class="container">
+<div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-6">
+      <div class="jumbotron postswrap">
+
+        <div class="postpic">
+          <%=image_tag(@user.avatar.url(:thumb), :class=>"responsive-image img-rounded" )%>
+        <%=link_to(f.user.username,:id=>@user.id)%>
+      </div>
+<%=f.description%></br>
+<div class="likers">
+  <div class="container">
+  <div class="row">
+<i class="fa fa-thumbs-up fa-2x"></i>
+  <%=f.likers(User).count%>
+</div>
+</div>
+  </div>
+<div class="border">
+  </div>
+  <%if current_user.likes?(f)%>
+  <%= link_to '<i class="fa fa-thumbs-down fa-2x"></i>'.html_safe, :action=>"unlike", :controller=> "posts", :id=>f %>
+  <%else%>
+  <%= link_to '<i class="fa fa-thumbs-up fa-2x"></i>'.html_safe, :action=>"like", :controller=> "posts", :id=>f %>
+    <div class="comment-pic">
+    <div class="container-fluid">
+    <div class="row ">
+        <div class="col lg-12 col-md-12 col-sm-6 col-xs-3">
+    <%=image_tag(@user.avatar.url(:comment), :class=>"responsive-image img-rounded")%>
+  </div>
+        <div class="col lg-12 col-md-12 col-sm-6 col-xs-3">
+   <textarea name="message" cols="40" rows="10" id="status_message" class="form-control message" style="height: 32px;width:80%; overflow: hidden;" placeholder="What's on your mind ?"></textarea> 
+  </div>
+  </div>
+  </div>
+  </div>
+  <%end%>
+</div>
+</div>
+</div>
+</div>
+</div>
 <%end%>
+<%if @user.photos.size < 0 %>
+      <%= image_tag(@user.photo.url)%>
+      <%end%>
 <h2>Friends</h2>
 <ul>
 
@@ -29,10 +77,9 @@
 
 
 <h2>Friends</h2>
-<ul>
+<ul class="friendd">
   <% for friendship in @user.friendships %>
     <li>
-      <%=h friendship.friend.username %>
       (<%= link_to "remove", friendship, :method => :delete %>)
     </li>
   <% end %>
@@ -40,3 +87,5 @@
     <li><%=h user.username %></li>
   <% end %>
 </ul>
+</div>
+</div>
